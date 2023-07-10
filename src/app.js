@@ -22,8 +22,8 @@ app.get('/livros', (req, res) =>{
 })
 
 app.get('/livros/:id', (req, res) => {
-    let index = buscarLivro(req.params.id)// puxando o dado da line
-    return res.json(livros[index])
+    let index = buscarLivro({id: req.params.id, livros})       // puxando o dado da line
+    res.json(livros[index])
 })
 
 app.post('/livros', (req,res) => {
@@ -32,17 +32,16 @@ app.post('/livros', (req,res) => {
 })
 
 app.put('/livros/:id', (req, res) => {
-    let index = buscarLivro(req.params.id)// puxando o dado da line
+    let index = buscarLivro({id: req.params.id, livros})        // puxando o dado da line
     livros[index].titulo = req.body.titulo
     return res.json(livros)
 })
 
 app.delete('/livros/:id', (req, res) => {
-    let { id } = req.params
-    let { nome, idade } = req.body
-    // let index = buscarLivro(req.params.id)// puxando o dado da line
-    livros[index].titulo = req.body.titulo
-    return res.json(livros)
+    let {id} = req.params
+    let index = buscarLivro({id, livros})                        // puxando o dado da line
+    livros.splice(index, 1)
+    return res.send(`${id} REMOVIDO`)
 })
 
 export default app
