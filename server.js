@@ -1,19 +1,8 @@
-const http = require("http")
-const port = 3000
+import app from './src/app.js'
+
+const port = process.env.PORT || 3000 //setando a porta que está especificada dentro do .env ou roda na 3000
+
+app.listen(port, () => console.log(`Rodando http://localhost:${port}`))
 
 
-const rotas ={
-    '/':'Curso Node',
-    '/livros':'livro',
-    '/autores':'Listagem de autores',
-    '/sobre':'asdasdasd'
-}
-
-
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/plain'})
-    res.end(rotas[req.url])
-})
-
-
-server.listen(port, () => console.log(`Rodando http://localhost:${port}`))
+// acrecido o  "type":"module", no package para entender modularização
