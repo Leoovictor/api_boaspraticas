@@ -1,6 +1,10 @@
 import express from "express" //libs externas sempre em primeiro lugar
 
 import {buscarLivro} from "./helpers/search.js"//libs proprias sempre em segundo plano
+import db from "./config/dbConnect.js"
+
+db.on("error", console.log.bind(console, "Erro de conexão"))
+db.once("open", () => {console.log("Conexão estabelecida")})
 
 const app = express() //intanciando express
 app.use(express.json()) //intaciando o json
